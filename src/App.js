@@ -1,25 +1,32 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import {Route,Routes} from 'react-router-dom'
+import Register from './pages/Register'
+import Login from './pages/Login'
+import Home from './pages/Home'
+import Header from './components/header'
+import AddBlog from './pages/AddBlog'
+import AddCateg from './pages/AddCateg'
+import SingleBlog from './pages/SingleBlog'
+import ProtectedRoutes from './services/ProtectedRoutes'
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <>
+    <Header />
+      <Routes>
+        <Route path='/login' element={<Login />} />
+        <Route path='/register' element={<Register />} />
+
+        // Protected Routes 
+        <Route path='/' element={<ProtectedRoutes />}>
+        <Route path='/add-blog' element={<AddBlog />} />
+        <Route path='/add-category' element={<AddCateg />} />
+        <Route path='/blog/:id' element={<SingleBlog />} />
+        <Route path='/' element={<Home />} />
+        </Route>
+      </Routes>
+    </>
+  )
 }
 
-export default App;
+export default App
