@@ -8,6 +8,7 @@ import AddBlog from './pages/AddBlog'
 import AddCateg from './pages/AddCateg'
 import SingleBlog from './pages/SingleBlog'
 import ProtectedRoutes from './services/ProtectedRoutes'
+import Fotter from './components/Fotter'
 
 const App = () => {
   return (
@@ -25,6 +26,7 @@ const App = () => {
         <Route path='/' element={<Home />} />
         </Route>
       </Routes>
+      <Fotter />
     </>
   )
 }

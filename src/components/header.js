@@ -33,7 +33,7 @@ const Header = () => {
 
         </button>
 
-        <div class="collapse navbar-collapse fs-1" id="navbarSupportedContent">
+        <div class="collapse navbar-collapse mx-10" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto text-white">
             <li class="nav-item">
               <Link className="navbar-brand text-white" to="/">
