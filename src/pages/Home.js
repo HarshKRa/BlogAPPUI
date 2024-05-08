@@ -7,7 +7,7 @@ const Home = () => {
 
   useEffect(() => {
     const fetchAllBlogs = async () => {
-      const res = await axios.get("http://localhost:9000/api/v1/get/allblogs", {
+      const res = await axios.get("https://blogappbackend-1ets.onrender.com/api/v1/get/allblogs", {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
@@ -38,7 +38,7 @@ const Home = () => {
                           data-mdb-ripple-color="light"
                         >
                           <img
-                            src={`http://localhost:9000/${item.thumbnail}`}
+                            src={`https://blogappbackend-1ets.onrender.com/${item.thumbnail}`}
                             class="img-fluid"
                             alt="Please Check Internet Connection"
                             style={{height:"200px",width:"200px"}}

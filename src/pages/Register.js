@@ -14,7 +14,7 @@ const Register = () => {
         e.preventDefault();
 
         try {
-            const res = await axios.post("http://localhost:9000/api/v1/users/register",input);
+            const res = await axios.post("https://blogappbackend-1ets.onrender.com/api/v1/users/register",input);
             alert(res.data.message);
             navigate("/login");
         } catch (error) {
