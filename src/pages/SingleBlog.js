@@ -33,7 +33,7 @@ const SingleBlog = () => {
             <h1 className="my-3">{blog.title}</h1>
 
             <img
-              src={`http://localhost:9000/${blog.thumbnail}`}
+              src={`https://blogappbackend-1ets.onrender.com/${blog.thumbnail}`}
               className="img img-responsive img-arounded my-3"
               alt=""
             ></img>
