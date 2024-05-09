@@ -9,6 +9,7 @@ import AddCateg from './pages/AddCateg'
 import SingleBlog from './pages/SingleBlog'
 import ProtectedRoutes from './services/ProtectedRoutes'
 import Fotter from './components/Fotter'
+import Myblog from './pages/Myblog'
 
 const App = () => {
   return (
@@ -19,6 +20,7 @@ const App = () => {
         <Route path='/register' element={<Register />} />
 
         <Route path='/' element={<ProtectedRoutes />}>
+        <Route path='/my-blog' element={<Myblog />} />
         <Route path='/add-blog' element={<AddBlog />} />
         <Route path='/add-category' element={<AddCateg />} />
         <Route path='/blog/:id' element={<SingleBlog />} />

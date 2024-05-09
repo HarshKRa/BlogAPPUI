@@ -40,6 +40,12 @@ const Header = () => {
                 Home
               </Link>
             </li>
+
+            <li class="nav-item">
+              <Link className="navbar-brand text-white" to="/my-blog">
+                My Blog
+              </Link>
+            </li>
             <li class="nav-item">
               <Link className="navbar-brand text-white" to="/add-blog">
                 Add Blog

@@ -7,7 +7,7 @@ const Home = () => {
 
   useEffect(() => {
     const fetchAllBlogs = async () => {
-      const res = await axios.get("https://blogappbackend-1ets.onrender.com/api/v1/get/allPblicblogs", {
+      const res = await axios.get("https://blogappbackend-1ets.onrender.com/api/v1/get/allblogs", {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },

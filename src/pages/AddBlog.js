@@ -35,6 +35,7 @@ const AddBlog = () => {
 
   formdata.append("title", input.title);
   formdata.append("category", input.category);
+  formdata.append("flag", input.flag);
   formdata.append("description", input.discription);
   formdata.append("thumbnail", file);
 
@@ -97,6 +98,24 @@ const AddBlog = () => {
                     category.map((item) => {
                       return <option value={item._id}>{item.title} </option>;
                     })}
+                </select>
+              </div>
+
+              <div className="mb-3">
+                <label htmlFor="formGroupExampleInput" className="form-label">
+                  Public
+                </label>
+                <select
+                  className="form-control"
+                  name="flag"
+                  onChange={(e) => {
+                    setInput({ ...input, [e.target.name]: e.target.value });
+                  }}
+                >
+                  <option disabled>Select Category</option>
+                   <option value="true">true</option>;
+                   <option value="false">false</option>;
+                 
                 </select>
               </div>
 
