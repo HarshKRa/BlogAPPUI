@@ -170,6 +170,7 @@ const AddBlog = () => {
                       width: "30px",
                     }}
                     src={input.thumbnail}
+                    alt=""
                   />
                 )}
               </div>
