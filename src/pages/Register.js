@@ -1,26 +1,29 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from 'axios'
+import axios from "axios";
 
 const Register = () => {
-    const navigate = useNavigate();
-    const[input,setInput] = useState({
-        username:"",
-        email:"",
-        password : "",
-    })
+  const navigate = useNavigate();
+  const [input, setInput] = useState({
+    username: "",
+    email: "",
+    password: "",
+  });
 
-    const handleSubmit = async(e)=>{
-        e.preventDefault();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-        try {
-            const res = await axios.post("https://blogappbackend-1ets.onrender.com/api/v1/users/register",input);
-            alert(res.data.message);
-            navigate("/login");
-        } catch (error) {
-            alert(error.response.data.message);
-        }
+    try {
+      const res = await axios.post(
+        "https://server-51gf.onrender.com/api/v1/users/register",
+        input
+      );
+      alert(res.data.message);
+      navigate("/login");
+    } catch (error) {
+      alert(error.response.data.message);
     }
+  };
   return (
     <>
       <div className="container shadow">
@@ -37,8 +40,8 @@ const Register = () => {
                   name="username"
                   className="form-control"
                   value={input.username}
-                  onChange={(e)=>{
-                    setInput({...input,[e.target.name]:e.target.value})
+                  onChange={(e) => {
+                    setInput({ ...input, [e.target.name]: e.target.value });
                   }}
                   id="formGroupExampleInput"
                   placeholder="Enter Name"
@@ -54,8 +57,8 @@ const Register = () => {
                   name="email"
                   className="form-control"
                   value={input.email}
-                  onChange={(e)=>{
-                    setInput({...input,[e.target.name]:e.target.value})
+                  onChange={(e) => {
+                    setInput({ ...input, [e.target.name]: e.target.value });
                   }}
                   id="formGroupExampleInput"
                   placeholder="Enter Eamil"
@@ -70,8 +73,8 @@ const Register = () => {
                   name="password"
                   className="form-control"
                   value={input.password}
-                  onChange={(e)=>{
-                    setInput({...input,[e.target.name]:e.target.value})
+                  onChange={(e) => {
+                    setInput({ ...input, [e.target.name]: e.target.value });
                   }}
                   id="formGroupExampleInput"
                   placeholder="Enter Password"

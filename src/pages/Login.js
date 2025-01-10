@@ -14,7 +14,7 @@ const Login = () => {
 
     try {
       const res = await axios.post(
-        "https://blogappbackend-1ets.onrender.com/api/v1/users/login",
+        "https://server-51gf.onrender.com/api/v1/users/login",
         input
       );
       alert(res.data.massage);

@@ -7,11 +7,14 @@ const Home = () => {
 
   useEffect(() => {
     const fetchAllBlogs = async () => {
-      const res = await axios.get("https://blogappbackend-1ets.onrender.com/api/v1/get/allblogs", {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      });
+      const res = await axios.get(
+        "https://server-51gf.onrender.com/api/v1/get/allblogs",
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      );
       setBlogs(res.data);
       console.log(res);
     };
@@ -38,10 +41,10 @@ const Home = () => {
                           data-mdb-ripple-color="light"
                         >
                           <img
-                            src={`https://blogappbackend-1ets.onrender.com/${item.thumbnail}`}
+                            src={item.thumbnail}
                             class="img-fluid"
                             alt="Please Check Internet Connection"
-                            style={{height:"200px",width:"200px"}}
+                            style={{ height: "200px", width: "200px" }}
                           />
                           <a href="#!">
                             <div
@@ -53,7 +56,12 @@ const Home = () => {
                           </a>
                           <div class="crad-body">
                             <h5 class="card-title">{item.title}</h5>
-                            <p class="card-text" style={{height:"300px", overflow:"hidden"}}>{item.description}</p>
+                            <p
+                              class="card-text"
+                              style={{ height: "300px", overflow: "hidden" }}
+                            >
+                              {item.description}
+                            </p>
                             <Link
                               to={`/blog/${item._id}`}
                               class="btn btn-primary"

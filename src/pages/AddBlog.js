@@ -1,50 +1,54 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { uploadToCloudnary } from "../UploaOnCloud";
 
 const AddBlog = () => {
   const navigate = useNavigate();
   const [input, setInput] = useState({
     title: "",
-    discription: "",
     category: "",
+    description: "",
+    flag: false,
+    thumbnail: "",
   });
 
-  const [file, setFile] = useState([]);
+  console.log(input);
 
   const [category, setCategory] = useState([]);
+  const [uploadImage, setUploadImage] = useState(false);
+
+  const handleImageChange = async (e) => {
+    const file = e.target.files[0];
+    setUploadImage(true);
+    const image = await uploadToCloudnary(file);
+    setInput({ ...input, [e.target.name]: image });
+    setUploadImage(false);
+  };
 
   useEffect(() => {
     const fetchAllCategory = async () => {
       const res = await axios.get(
-        "https://blogappbackend-1ets.onrender.com/api/v1/get/categories",
+        "https://server-51gf.onrender.com/api/v1/get/categories",
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
         }
       );
-      setCategory(res.data);
+      setCategory(res?.data);
     };
 
     fetchAllCategory();
   }, []);
 
-  // creating a form data
-  const formdata = new FormData();
-
-  formdata.append("title", input.title);
-  formdata.append("category", input.category);
-  formdata.append("flag", input.flag);
-  formdata.append("description", input.discription);
-  formdata.append("thumbnail", file);
-
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     try {
       const res = await axios.post(
-        "https://blogappbackend-1ets.onrender.com/api/v1/add/blog",
-        formdata,
+        "https://server-51gf.onrender.com/api/v1/add/blog",
+        input,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -52,10 +56,10 @@ const AddBlog = () => {
         }
       );
       console.log(res);
-      alert(res.data.massage);
+      alert(res.data.massage || "blog added successfully");
       navigate("/");
     } catch (error) {
-      alert(error.response.data.massage);
+      alert(error.response.data.massage || "blog not added");
     }
   };
 
@@ -93,7 +97,7 @@ const AddBlog = () => {
                     setInput({ ...input, [e.target.name]: e.target.value });
                   }}
                 >
-                  <option disabled>Select Category</option>
+                  <option>Select Category</option>
                   {category &&
                     category.map((item) => {
                       return <option value={item._id}>{item.title} </option>;
@@ -108,14 +112,14 @@ const AddBlog = () => {
                 <select
                   className="form-control"
                   name="flag"
+                  value={input.flag}
                   onChange={(e) => {
                     setInput({ ...input, [e.target.name]: e.target.value });
                   }}
                 >
                   <option disabled>Select Category</option>
-                   <option value="true">true</option>;
-                   <option value="false">false</option>;
-                 
+                  <option value="true">true</option>;
+                  <option value="false">false</option>;
                 </select>
               </div>
 
@@ -124,10 +128,10 @@ const AddBlog = () => {
                   Description
                 </label>
                 <textarea
-                  name="discription"
+                  name="description"
                   placeholder="Blog Description"
                   className="form-control"
-                  value={input.discription}
+                  value={input.description}
                   onChange={(e) => {
                     setInput({ ...input, [e.target.name]: e.target.value });
                   }}
@@ -141,16 +145,33 @@ const AddBlog = () => {
                 <input
                   type="file"
                   name="thumbnail"
-                  onChange={(e) => setFile(e.target.files[0])}
+                  onChange={handleImageChange}
                   className="form-control"
                   id="formGroupExampleInput"
                   placeholder="Select Thumbnail"
                 />
               </div>
-              <div className="mb-3">
-                <button type="submit" className="btn btn-primary btn-block">
+              <div
+                style={{ display: "flex", justifyContent: "space-between" }}
+                className="mb-3"
+              >
+                <button
+                  disabled={uploadImage}
+                  type="submit"
+                  className="btn btn-primary btn-block"
+                >
                   Add Blog
                 </button>
+                {input.thumbnail && (
+                  <img
+                    style={{
+                      marginLeft: "50px",
+                      height: "30px",
+                      width: "30px",
+                    }}
+                    src={input.thumbnail}
+                  />
+                )}
               </div>
             </form>
           </div>
